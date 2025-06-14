@@ -5,6 +5,12 @@ import { useQuizStore } from '@/app/lib/store';
 import AudioPlayer from './AudioPlayer';
 import ProgressBar from './ProgressBar';
 
+function getFileNameFromPath(path: string | undefined) {
+    if (!path) return '';
+    // Extrait le nom du fichier à partir du chemin complet
+    return path.split('/').pop() || '';
+}
+
 function ResetButton() {
     const reset = useQuizStore((state) => state.reset);
 
@@ -73,9 +79,9 @@ export default function QuizPlayer() {
 
             {
                 triche && (
-                    <div className="flex flex-col items-center text-xs font-mono">
-                        <p>state : {current.fichier}</p>
-                        <p>dom : {audioRef.current?.currentSrc || 'chargement...'}</p>
+                    <div className="flex flex-col items-center text-xs leading-tight tracking-tight font-mono">
+                        <p>state : {getFileNameFromPath(current.fichier)}</p>
+                        <p>dom : {getFileNameFromPath(audioRef.current?.currentSrc)}</p>
                     </div>
                 )
             }
