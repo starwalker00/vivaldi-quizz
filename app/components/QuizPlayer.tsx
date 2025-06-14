@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { useQuizStore } from '@/app/lib/store';
+import AudioPlayer from './AudioPlayer'; // adapte le chemin si besoin
 
 export default function QuizPlayer() {
     const { shuffled, index, next, score, incrementScore, reset } = useQuizStore();
@@ -48,16 +49,14 @@ export default function QuizPlayer() {
     }
 
     return (
-        <div className={`flex flex-col items-center gap-6 transition-colors duration-500 ${success ? 'bg-green-200' : ''}`}>            <div className="text-center space-y-1">
-            <p>✅ Réussis : {score}</p>
-            <p>❌ Ratés : {ratés}</p>
-            <p>🎼 Morceau : {index + 1} / {total}</p>
-        </div>
+        <div className={`flex flex-col items-center gap-6 transition-colors duration-500 ${success ? 'bg-green-100' : ''}`}>
+            <div className="text-center space-y-1">
+                <p>✅ Réussis : {score}</p>
+                <p>❌ Ratés : {ratés}</p>
+                <p>🎼 Morceau : {index + 1} / {total}</p>
+            </div>
 
-            <audio controls ref={audioRef} autoPlay>
-                <source src={current.fichier} type="audio/mpeg" />
-                Votre navigateur ne supporte pas l&apos;audio.
-            </audio>
+            <AudioPlayer ref={audioRef} src={current.fichier} />
 
             {triche && (
                 <div className="mt-2 text-sm font-mono text-gray-600 space-y-1">
