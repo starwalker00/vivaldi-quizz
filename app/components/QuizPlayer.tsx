@@ -2,8 +2,8 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { useQuizStore } from '@/app/lib/store';
-import AudioPlayer from './AudioPlayer'; // adapte le chemin si besoin
-import ProgressBar from './ProgressBar'; // adapte le chemin si besoin
+import AudioPlayer from './AudioPlayer';
+import ProgressBar from './ProgressBar';
 
 function ResetButton() {
     const reset = useQuizStore((state) => state.reset);
@@ -65,12 +65,7 @@ export default function QuizPlayer() {
 
     // jeu en cours
     return (
-        <div className={`flex flex-col items-center gap-6 transition-colors duration-500 `}>
-            {/* <div className="text-center space-y-1">
-                <p>✅ Réussis : {score}</p>
-                <p>❌ Ratés : {ratés}</p>
-                <p>🎼 Morceau : {index + 1} / {total}</p>
-            </div> */}
+        <div className={`flex flex-col items-center gap-6`}>
             <ProgressBar />
             <AudioPlayer ref={audioRef} src={current.fichier} />
 

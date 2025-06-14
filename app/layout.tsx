@@ -18,7 +18,7 @@ export default function RootLayout({
         <link rel="icon" href="/icons/icon-192x192.png" />
         <meta name="theme-color" content="#1e40af" />
       </head>
-      <body className="min-h-screen bg-gray-100 p-4 font-sans">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
