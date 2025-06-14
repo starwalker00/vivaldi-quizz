@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { pieces } from './data';
 
 // type Saison = 'Printemps' | 'Été' | 'Automne' | 'Hiver';
+type Resultat = 'success' | 'fail' | null;
 
 interface QuizState {
     shuffled: typeof pieces;
@@ -10,6 +11,8 @@ interface QuizState {
     next: () => void;
     incrementScore: () => void;
     reset: () => void;
+    history: Resultat[];
+    addHistory: (result: Resultat) => void;
 }
 
 function shuffle<T>(array: T[]): T[] {
@@ -33,8 +36,8 @@ export const useQuizStore = create<QuizState>((set) => ({
         set((state) => ({
             score: state.score + 1,
         })),
-    history: [] as ('success' | 'fail')[],
-    addHistory: (result: 'success' | 'fail') => set((state) => ({
+    history: [] as Resultat[],
+    addHistory: (result: Resultat) => set((state) => ({
         history: [...state.history, result]
     })),
     reset: () =>
