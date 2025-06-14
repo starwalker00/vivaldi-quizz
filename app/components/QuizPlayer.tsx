@@ -7,9 +7,12 @@ import AudioPlayer from './AudioPlayer'; // adapte le chemin si besoin
 export default function QuizPlayer() {
     const { shuffled, index, next, score, incrementScore, reset } = useQuizStore();
     const [wrongAnswers, setWrongAnswers] = useState<string[]>([]);
-    const [triche, setTriche] = useState(true);
-    const [success, setSuccess] = useState(false);
+    const [triche, setTriche] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
+
+    // pour flash background vert ou rouge après réponse
+    const [success, setSuccess] = useState(false);
+    const [failure, setFailure] = useState(false);
 
     const current = shuffled[index];
     const total = shuffled.length;
@@ -27,6 +30,10 @@ export default function QuizPlayer() {
                 incrementScore(); // bon du premier coup
                 setSuccess(true);
                 setTimeout(() => setSuccess(false), 1000); // effet pendant 1s
+            }
+            else if (wrongAnswers.length > 0) {
+                setFailure(true);
+                setTimeout(() => setFailure(false), 1000); // effet pendant 1s
             }
             setTimeout(() => next(), 500);
         } else {
@@ -49,7 +56,7 @@ export default function QuizPlayer() {
     }
 
     return (
-        <div className={`flex flex-col items-center gap-6 transition-colors duration-500 ${success ? 'bg-green-100' : ''}`}>
+        <div className={`flex flex-col items-center gap-6 transition-colors duration-500 ${success ? 'bg-green-100' : ''} ${failure ? 'bg-red-100' : ''}`}>
             <div className="text-center space-y-1">
                 <p>✅ Réussis : {score}</p>
                 <p>❌ Ratés : {ratés}</p>
