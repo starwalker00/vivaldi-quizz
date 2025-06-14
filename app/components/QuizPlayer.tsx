@@ -23,10 +23,6 @@ export default function QuizPlayer() {
     const [triche, setTriche] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
 
-    // pour flash background vert ou rouge après réponse
-    const [success, setSuccess] = useState(false);
-    const [failure, setFailure] = useState(false);
-
     const current = shuffled[index];
     const total = shuffled.length;
 
@@ -42,14 +38,10 @@ export default function QuizPlayer() {
                 // bon du premier coup
                 incrementScore();
                 addHistory('success');
-                setSuccess(true);
-                setTimeout(() => setSuccess(false), 1000); // effet pendant 1s
             }
             else if (wrongAnswers.length > 0) {
                 // bon mais pas du premier coup
                 addHistory('fail');
-                setFailure(true);
-                setTimeout(() => setFailure(false), 1000); // effet pendant 1s
             }
             setTimeout(() => next(), 500);
         } else {
@@ -73,7 +65,7 @@ export default function QuizPlayer() {
 
     // jeu en cours
     return (
-        <div className={`flex flex-col items-center gap-6 transition-colors duration-500 ${success ? 'bg-green-100' : ''} ${failure ? 'bg-red-100' : ''}`}>
+        <div className={`flex flex-col items-center gap-6 transition-colors duration-500 `}>
             {/* <div className="text-center space-y-1">
                 <p>✅ Réussis : {score}</p>
                 <p>❌ Ratés : {ratés}</p>
