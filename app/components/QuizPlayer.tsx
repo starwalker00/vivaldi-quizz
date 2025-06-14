@@ -6,7 +6,8 @@ import { useQuizStore } from '@/app/lib/store';
 export default function QuizPlayer() {
     const { shuffled, index, next, score, incrementScore, reset } = useQuizStore();
     const [wrongAnswers, setWrongAnswers] = useState<string[]>([]);
-    const [triche, setTriche] = useState(false);
+    const [triche, setTriche] = useState(true);
+    const [success, setSuccess] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
 
     const current = shuffled[index];
@@ -23,6 +24,8 @@ export default function QuizPlayer() {
         if (saison === current.saison) {
             if (wrongAnswers.length === 0) {
                 incrementScore(); // bon du premier coup
+                setSuccess(true);
+                setTimeout(() => setSuccess(false), 1000); // effet pendant 1s
             }
             setTimeout(() => next(), 500);
         } else {
@@ -45,12 +48,11 @@ export default function QuizPlayer() {
     }
 
     return (
-        <div className="flex flex-col items-center gap-6">
-            <div className="text-center space-y-1">
-                <p>✅ Réussis : {score}</p>
-                <p>❌ Ratés : {ratés}</p>
-                <p>🎼 Morceau : {index + 1} / {total}</p>
-            </div>
+        <div className={`flex flex-col items-center gap-6 transition-colors duration-500 ${success ? 'bg-green-200' : ''}`}>            <div className="text-center space-y-1">
+            <p>✅ Réussis : {score}</p>
+            <p>❌ Ratés : {ratés}</p>
+            <p>🎼 Morceau : {index + 1} / {total}</p>
+        </div>
 
             <audio controls ref={audioRef} autoPlay>
                 <source src={current.fichier} type="audio/mpeg" />
@@ -58,7 +60,10 @@ export default function QuizPlayer() {
             </audio>
 
             {triche && (
-                <p className="mt-2 text-sm font-mono text-gray-600">{current.fichier}</p>
+                <div className="mt-2 text-sm font-mono text-gray-600 space-y-1">
+                    <p>Nom fichier (état React) : {current.fichier}</p>
+                    <p>Source audio (DOM) : {audioRef.current?.currentSrc || 'chargement...'}</p>
+                </div>
             )}
 
             <div className="grid grid-cols-2 gap-4 mt-4">
