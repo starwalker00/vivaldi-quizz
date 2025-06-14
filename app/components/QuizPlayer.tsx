@@ -13,7 +13,7 @@ function ResetButton() {
             onClick={reset}
             className="mt-4 px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition"
         >
-            🔁 Rejouer le quiz
+            Rejouer le quiz
         </button>
     );
 }
