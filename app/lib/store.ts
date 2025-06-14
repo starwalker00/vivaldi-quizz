@@ -33,10 +33,15 @@ export const useQuizStore = create<QuizState>((set) => ({
         set((state) => ({
             score: state.score + 1,
         })),
+    history: [] as ('success' | 'fail')[],
+    addHistory: (result: 'success' | 'fail') => set((state) => ({
+        history: [...state.history, result]
+    })),
     reset: () =>
         set(() => ({
             shuffled: shuffle(pieces),
             index: 0,
             score: 0,
+            history: [],
         })),
 }));
