@@ -18,7 +18,7 @@ function ResetButton() {
     );
 }
 export default function QuizPlayer() {
-    const { addHistory, shuffled, index, next, score, incrementScore, reset } = useQuizStore();
+    const { addHistory, shuffled, index, next, score, incrementScore } = useQuizStore();
     const [wrongAnswers, setWrongAnswers] = useState<string[]>([]);
     const [triche, setTriche] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -29,7 +29,7 @@ export default function QuizPlayer() {
 
     const current = shuffled[index];
     const total = shuffled.length;
-    const ratés = index - score;
+    // const ratés = index - score;
 
     useEffect(() => {
         audioRef.current?.load();
