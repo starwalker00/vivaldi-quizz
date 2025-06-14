@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { pieces } from './data';
 
-type Saison = 'Printemps' | 'Été' | 'Automne' | 'Hiver';
+// type Saison = 'Printemps' | 'Été' | 'Automne' | 'Hiver';
 
 interface QuizState {
     shuffled: typeof pieces;

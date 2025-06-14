@@ -54,7 +54,7 @@ export default function QuizPlayer() {
 
             <audio controls ref={audioRef} autoPlay>
                 <source src={current.fichier} type="audio/mpeg" />
-                Votre navigateur ne supporte pas l'audio.
+                Votre navigateur ne supporte pas l&apos;audio.
             </audio>
 
             {triche && (
