@@ -16,16 +16,19 @@ const AudioPlayer = forwardRef<HTMLAudioElement, AudioPlayerProps>(({ src }, ref
     }, [src]);
 
     return (
-        <audio
-            controls
-            ref={ref}
-            autoPlay
-            className={`border-4 rounded-md transition-colors duration-500 ${highlight ? 'border-blue-600' : 'border-transparent'
-                }`}
-        >
-            <source src={src} type="audio/mpeg" />
-            Votre navigateur ne supporte pas l&apos;audio.
-        </audio>
+        <>
+            <audio
+                controls
+                ref={ref}
+                autoPlay
+                className={`border-4 rounded-md transition-colors duration-500 ${highlight ? 'border-blue-600' : 'border-transparent'
+                    }`}
+            >
+                <source src={src} type="audio/mpeg" />
+                Votre navigateur ne supporte pas l&apos;audio.
+            </audio>
+            <span className='collapse'>{src}</span> {/* nécessaire pour synchro state/audiosrc (bizarre) */}
+        </>
     );
 });
 

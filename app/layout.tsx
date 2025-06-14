@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="fr">
       <head>
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="icon" href="/icons/icon-192x192.png" />
+        <link rel="icon" href="/pwa-512x512.png" />
         <meta name="theme-color" content="#1e40af" />
       </head>
       <body>{children}</body>

@@ -28,9 +28,11 @@ export default function QuizPlayer() {
 
     useEffect(() => {
         audioRef.current?.load();
-        audioRef.current?.play();
+        if (index > 0) {
+            audioRef.current?.play();
+        }
         setWrongAnswers([]);
-    }, [index]);
+    }, [shuffled, index]);
 
     const handleAnswer = (saison: string) => {
         if (saison === current.saison) {
@@ -71,9 +73,9 @@ export default function QuizPlayer() {
 
             {
                 triche && (
-                    <div className="mt-2 text-sm font-mono text-gray-600 space-y-1">
-                        <p>Nom fichier (état React) : {current.fichier}</p>
-                        <p>Source audio (DOM) : {audioRef.current?.currentSrc || 'chargement...'}</p>
+                    <div className="flex flex-col items-center text-xs font-mono">
+                        <p>state : {current.fichier}</p>
+                        <p>dom : {audioRef.current?.currentSrc || 'chargement...'}</p>
                     </div>
                 )
             }
